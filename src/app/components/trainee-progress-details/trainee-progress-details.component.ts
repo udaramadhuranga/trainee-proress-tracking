@@ -1,25 +1,25 @@
 import { UserExerciseService } from './../../_services/user-exercise.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+// import { ChartOptions, ChartType } from 'chart.js';
+// import { Color, Label, SingleDataSet } from 'ng2-charts';
 
 import { ChartConfiguration, Chart, registerables } from 'chart.js';
 import { UserExercise } from 'src/app/models/user-exercise';
 import { UserExerciserReq } from 'src/app/models/user-exerciser-req';
-import { StorageService } from 'src/app/_services/storage.service';
-import { DatePipe } from '@angular/common';
 
 Chart.register(...registerables);
+
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css'],
+  selector: 'app-trainee-progress-details',
+  templateUrl: './trainee-progress-details.component.html',
+  styleUrls: ['./trainee-progress-details.component.css'],
 })
-export class UserComponent {
+export class TraineeProgressDetailsComponent implements OnInit {
   userid: string;
   ExerciseList!: UserExercise[];
   comment: string;
   myChart: Chart;
-  myDate = new Date();
 
   labeldata: any[] = ['Completed', 'inprogress', 'Not Completed'];
   realdata: any[] = [];
@@ -27,12 +27,14 @@ export class UserComponent {
 
   constructor(
     private router: ActivatedRoute,
-    private userExercise: UserExerciseService,
-    private storageService: StorageService
+    private userExercise: UserExerciseService
   ) {}
   ngOnInit(): void {
-    this.userid = this.storageService.getId();
-    console.log(this.userid);
+    this.router.queryParams.subscribe((params: any) => {
+      console.log(params.data);
+      this.userid = params.data;
+    });
+
     this.getAllExerciseOfTrainee();
   }
 
@@ -117,57 +119,37 @@ export class UserComponent {
     });
   }
 
-  onClickStart(exercise: UserExercise) {
+  onClickSave(exercise: UserExercise) {
     const userExerciseReq = new UserExerciserReq();
 
-    userExerciseReq.Assined_Date = null;
-    userExerciseReq.Completed_Date = null;
-
+    userExerciseReq.Assined_Date = exercise.Assined_Date;
+    userExerciseReq.Completed_Date = exercise.Completed_Date;
+    userExerciseReq.comment = exercise.comment;
     userExerciseReq.exercise = exercise.exercise.id;
-    userExerciseReq.status = 'Not Started';
+    userExerciseReq.status = exercise.status;
     userExerciseReq.traineeId = exercise.traineeId.id;
 
     this.userExercise
-      .updatTraineeExerciseByTrainee(userExerciseReq, exercise.id)
+      .updatTraineeExerciseByAdmin(userExerciseReq, exercise.id)
       .subscribe((response) => {
         alert('success');
         console.log(response);
-        this.myChart.destroy();
-        this.getAllExerciseOfTrainee();
+        this.getAllExercises();
       });
   }
-  onClickInprogress(exercise: UserExercise) {
+
+  onClickChangeState(exercise: UserExercise) {
     const userExerciseReq = new UserExerciserReq();
 
-    userExerciseReq.Assined_Date = this.myDate;
+    userExerciseReq.Assined_Date = exercise.Assined_Date;
     userExerciseReq.Completed_Date = null;
-
+    userExerciseReq.comment = exercise.comment;
     userExerciseReq.exercise = exercise.exercise.id;
     userExerciseReq.status = 'inProgress';
     userExerciseReq.traineeId = exercise.traineeId.id;
 
     this.userExercise
-      .updatTraineeExerciseByTrainee(userExerciseReq, exercise.id)
-      .subscribe((response) => {
-        alert('success');
-        console.log(response);
-        this.myChart.destroy();
-        this.getAllExerciseOfTrainee();
-      });
-  }
-
-  onClickComplete(exercise: UserExercise) {
-    const userExerciseReq = new UserExerciserReq();
-
-    userExerciseReq.Assined_Date = exercise.Assined_Date;
-    userExerciseReq.Completed_Date = this.myDate;
-
-    userExerciseReq.exercise = exercise.exercise.id;
-    userExerciseReq.status = 'Completed';
-    userExerciseReq.traineeId = exercise.traineeId.id;
-
-    this.userExercise
-      .updatTraineeExerciseByTrainee(userExerciseReq, exercise.id)
+      .updatTraineeExerciseByAdmin(userExerciseReq, exercise.id)
       .subscribe((response) => {
         alert('success');
         console.log(response);

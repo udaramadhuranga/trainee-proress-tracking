@@ -1,3 +1,4 @@
+import { TraineeProgressDetailsComponent } from './components/trainee-progress-details/trainee-progress-details.component';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
 import { TrainerComponent } from './components/trainer/trainer.component';
@@ -10,6 +11,7 @@ import { AuthGuard } from './_auth/auth.guard';
 import { TrainerListComponent } from './components/trainer-list/trainer-list.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { TraineeListComponent } from './components/trainee-list/trainee-list.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -34,8 +36,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: 'trainer-list', component: TrainerListComponent },
+  { path: 'trainee-list', component: TraineeListComponent },
   { path: 'add-user', component: AddUserComponent },
   { path: 'update-user/:id', component: EditUserComponent },
+  { path: 'trainee-progress', component: TraineeProgressDetailsComponent },
 ];
 
 @NgModule({

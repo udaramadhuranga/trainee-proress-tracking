@@ -22,6 +22,14 @@ export class StorageService {
     return localStorage.getItem('jwtToken');
   }
 
+  public setId(id: string) {
+    localStorage.setItem('id', id);
+  }
+
+  public getId(): string {
+    return localStorage.getItem('id');
+  }
+
   public isLoggedIn() {
     return this.getRoles() && this.getToken();
   }

@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
         console.log(response.roles);
         this.storageService.setRoles(response.roles);
         this.storageService.setToken(response.token);
+        this.storageService.setId(response.id);
 
         const role = response.roles[0];
         if (role == 'ROLE_ADMIN') {
