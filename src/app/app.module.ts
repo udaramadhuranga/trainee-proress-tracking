@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,9 @@ import { UserService } from './_services/user.service';
 import { TrainerListComponent } from './components/trainer-list/trainer-list.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { TraineeListComponent } from './components/trainee-list/trainee-list.component';
+import { TraineeProgressDetailsComponent } from './components/trainee-progress-details/trainee-progress-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     TrainerListComponent,
     AddUserComponent,
     EditUserComponent,
+    TraineeListComponent,
+    TraineeProgressDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +48,8 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NgChartsModule,
   ],
   providers: [
     AuthGuard,

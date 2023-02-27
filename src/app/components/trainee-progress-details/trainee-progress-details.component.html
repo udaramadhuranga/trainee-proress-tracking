@@ -64,24 +64,28 @@
                 <h5>{{ exercise.Assined_Date }}</h5>
               </div>
 
-              <div class="row">
-                <div class="col-md-6" *ngIf="exercise.status != 'Not Started'">
-                  <div class="btn btn-danger" (click)="onClickStart(exercise)">
-                    Not Start
+              <div class="row" *ngIf="exercise.status == 'Completed'">
+                <div class="form-group mb-3">
+                  <label for="comment" class="form-label">Add Comment</label>
+                  <textarea
+                    class="form-control"
+                    name="comment"
+                    id="comment"
+                    rows="2"
+                    [(ngModel)]="exercise.comment"
+                  ></textarea>
+                </div>
+                <div class="col-md-6">
+                  <div class="btn btn-info" (click)="onClickSave(exercise)">
+                    Save
                   </div>
                 </div>
-                <div class="col-md-6" *ngIf="exercise.status != 'inProgress'">
+                <div class="col-md-6">
                   <div
                     class="btn btn-success"
-                    (click)="onClickInprogress(exercise)"
+                    (click)="onClickChangeState(exercise)"
                   >
                     Inprogress
-                  </div>
-                </div>
-
-                <div class="col-md-6" *ngIf="exercise.status != 'Completed'">
-                  <div class="btn btn-info" (click)="onClickComplete(exercise)">
-                    Complete
                   </div>
                 </div>
               </div>
