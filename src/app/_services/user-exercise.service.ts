@@ -15,11 +15,15 @@ export class UserExerciseService {
     return this.httpclient.get(`${this.PATH_OF_API}/trainee-all-courses/${id}`);
   }
 
-  updatTraineeExerciseByAdmin(user: UserExerciserReq, id: string) {
-    return this.httpclient.put(`${this.PATH_OF_API}/${id}`, user);
+  updatTraineeExerciseByAdmin(userExercise: UserExerciserReq, id: string) {
+    return this.httpclient.put(`${this.PATH_OF_API}/${id}`, userExercise);
   }
 
-  updatTraineeExerciseByTrainee(user: UserExerciserReq, id: string) {
-    return this.httpclient.put(`${this.PATH_OF_API}/state/${id}`, user);
+  updatTraineeExerciseByTrainee(userExercise: UserExerciserReq, id: string) {
+    return this.httpclient.put(`${this.PATH_OF_API}/state/${id}`, userExercise);
+  }
+
+  addUserExercise(userExercise: UserExerciserReq) {
+    return this.httpclient.post(`${this.PATH_OF_API}/`, userExercise);
   }
 }
