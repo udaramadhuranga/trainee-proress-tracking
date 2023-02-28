@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainerListComponent implements OnInit {
   userList!: User[];
-  editingUser = {
+  editingUser: any = {
     username: '',
     phoneNo: '',
     address: '',
@@ -18,6 +18,7 @@ export class TrainerListComponent implements OnInit {
     password: '',
     email: '',
   };
+
   constructor(private userService: UserService) {}
   ngOnInit(): void {
     this.userService.getAllTrainers().subscribe((response: any) => {
@@ -32,13 +33,13 @@ export class TrainerListComponent implements OnInit {
   }
 
   onclickEdit(user: User) {
-    // (this.editingUser.username = user.username),
-    //   (this.editingUser.password = user.password),
-    //   (this.editingUser.email = user.email),
-    //   (this.editingUser.roles = user.roles),
-    //   (this.editingUser.address = user.address),
-    //   (this.editingUser.phoneNo = user.phoneNo),
-    //   (this.editingUser.id = user.id);
-    this.editingUser = user;
+    (this.editingUser.username = user.username),
+      (this.editingUser.password = user.password),
+      (this.editingUser.email = user.email),
+      (this.editingUser.roles = user.roles),
+      (this.editingUser.address = user.address),
+      (this.editingUser.phoneNo = user.phoneNo),
+      (this.editingUser.id = user.id);
+    // this.editingUser = user;
   }
 }
