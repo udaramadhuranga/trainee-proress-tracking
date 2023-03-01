@@ -24,6 +24,8 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { TraineeListComponent } from './components/trainee-list/trainee-list.component';
 import { TraineeProgressDetailsComponent } from './components/trainee-progress-details/trainee-progress-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddExerciseComponent } from './components/add-exercise/add-exercise.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EditUserComponent,
     TraineeListComponent,
     TraineeProgressDetailsComponent,
+    AddExerciseComponent,
+    ExerciseListComponent,
   ],
   imports: [
     BrowserModule,

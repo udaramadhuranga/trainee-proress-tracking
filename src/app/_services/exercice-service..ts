@@ -1,3 +1,4 @@
+import { Exercise } from './../models/exercise';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -11,5 +12,13 @@ export class ExerciceService {
 
   getAllExercises() {
     return this.httpclient.get(`${this.PATH_OF_API}/all`);
+  }
+
+  addExercise(Exercise: Exercise) {
+    return this.httpclient.post(`${this.PATH_OF_API}/`, Exercise);
+  }
+
+  deleteExercise(id: string) {
+    return this.httpclient.delete(`${this.PATH_OF_API}/${id}`);
   }
 }
