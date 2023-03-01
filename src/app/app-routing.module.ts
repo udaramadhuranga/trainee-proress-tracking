@@ -1,3 +1,4 @@
+import { UpdateExerciseComponent } from './components/update-exercise/update-exercise.component';
 import { AddExerciseComponent } from './components/add-exercise/add-exercise.component';
 import { TraineeProgressDetailsComponent } from './components/trainee-progress-details/trainee-progress-details.component';
 import { UserComponent } from './components/user/user.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'update-user/:id', component: EditUserComponent },
   { path: 'trainee-progress', component: TraineeProgressDetailsComponent },
   { path: 'add-exercise', component: AddExerciseComponent },
+  { path: 'update-exercise', component: UpdateExerciseComponent },
   { path: 'exercise-list', component: ExerciseListComponent },
 ];
 

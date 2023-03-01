@@ -1,19 +1,16 @@
-import { UserService } from './../../_services/user.service';
 import { ExerciceService } from './../../_services/exercice-service.';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Exercise } from './../../models/exercise';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { UserExerciserReq } from 'src/app/models/user-exerciser-req';
-import { UserExerciseService } from 'src/app/_services/user-exercise.service';
 
 @Component({
-  selector: 'app-add-exercise',
-  templateUrl: './add-exercise.component.html',
-  styleUrls: ['./add-exercise.component.css'],
+  selector: 'app-update-exercise',
+  templateUrl: './update-exercise.component.html',
+  styleUrls: ['./update-exercise.component.css'],
 })
-export class AddExerciseComponent implements OnInit {
+export class UpdateExerciseComponent implements OnInit {
   exerciser!: Exercise;
   exerciseForm: FormGroup;
   traineeList: User[];
@@ -21,14 +18,37 @@ export class AddExerciseComponent implements OnInit {
   constructor(
     private router: Router,
     private exerciseService: ExerciceService,
-    private userService: UserService,
-    private userExerciseService: UserExerciseService
+    private actrouter: ActivatedRoute
   ) {
     this.exerciser = new Exercise();
     this.createForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.actrouter.queryParams.subscribe((params: any) => {
+      this.exerciser = JSON.parse(params.data);
+      console.log(this.exerciser);
+    });
+    this.patchForm();
+  }
+
+  patchForm() {
+    if (this.exerciser.id != null) {
+      const control = <FormArray>this.exerciseForm.controls['tasks'];
+      this.exerciser.tasks.forEach((element) => {
+        control.push(
+          new FormGroup({
+            task: new FormControl(element),
+          })
+        );
+      });
+      this.exerciseForm.patchValue({
+        title: this.exerciser.title,
+        description: this.exerciser.description,
+        maximum_time: this.exerciser.maximum_time,
+      });
+    }
+  }
 
   createForm() {
     this.exerciseForm = new FormGroup({
@@ -38,11 +58,7 @@ export class AddExerciseComponent implements OnInit {
       ]),
       description: new FormControl(''),
       maximum_time: new FormControl(''),
-      tasks: new FormArray([
-        new FormGroup({
-          task: new FormControl(''),
-        }),
-      ]),
+      tasks: new FormArray([]),
     });
   }
 
@@ -73,33 +89,10 @@ export class AddExerciseComponent implements OnInit {
     this.exerciser.maximum_time = this.exerciseForm.value.maximum_time;
 
     this.exerciseService
-      .addExercise(this.exerciser)
-      .subscribe((response1: any) => {
-        const createdExercise = response1;
-
-        this.userService.getAllTrainees().subscribe((response2: any) => {
-          this.traineeList = response2;
-
-          let userExercise = new UserExerciserReq();
-          userExercise.Assined_Date = null;
-          userExercise.Completed_Date = null;
-          userExercise.comment = '';
-          userExercise.status = 'Not Started';
-          userExercise.exercise = createdExercise.id;
-
-          this.traineeList.forEach((trainee) => {
-            userExercise.traineeId = trainee.id;
-
-            this.userExerciseService
-              .addUserExercise(userExercise)
-              .subscribe((reponse3: any) => {
-                console.log(reponse3);
-                this.router.navigate(['/exercise-list']);
-              });
-          });
-        });
+      .updateExercise(this.exerciser, this.exerciser.id)
+      .subscribe((response: any) => {
+        console.log(response);
+        this.router.navigate(['/exercise-list']);
       });
-
-    console.log(subtasks);
   }
 }

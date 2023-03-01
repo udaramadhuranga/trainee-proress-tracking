@@ -1,6 +1,7 @@
 import { Exercise } from './../../models/exercise';
 import { ExerciceService } from './../../_services/exercice-service.';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exercise-list',
@@ -9,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExerciseListComponent implements OnInit {
   ExerciseList!: Exercise[];
-  constructor(private exerciseService: ExerciceService) {}
+  constructor(
+    private exerciseService: ExerciceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getAllExercises();
@@ -26,6 +30,12 @@ export class ExerciseListComponent implements OnInit {
     this.exerciseService.deleteExercise(id).subscribe((response) => {
       console.log(response);
       this.getAllExercises();
+    });
+  }
+
+  onclickUpdate(exercise) {
+    this.router.navigate(['/update-exercise'], {
+      queryParams: { data: JSON.stringify(exercise) },
     });
   }
 }

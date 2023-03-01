@@ -26,6 +26,7 @@ import { TraineeProgressDetailsComponent } from './components/trainee-progress-d
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddExerciseComponent } from './components/add-exercise/add-exercise.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
+import { UpdateExerciseComponent } from './components/update-exercise/update-exercise.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ExerciseListComponent } from './components/exercise-list/exercise-list.
     TraineeProgressDetailsComponent,
     AddExerciseComponent,
     ExerciseListComponent,
+    UpdateExerciseComponent,
   ],
   imports: [
     BrowserModule,

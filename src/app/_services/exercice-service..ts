@@ -14,11 +14,19 @@ export class ExerciceService {
     return this.httpclient.get(`${this.PATH_OF_API}/all`);
   }
 
-  addExercise(Exercise: Exercise) {
-    return this.httpclient.post(`${this.PATH_OF_API}/`, Exercise);
+  getExercise(id: string) {
+    return this.httpclient.get(`${this.PATH_OF_API}/${id}`);
+  }
+
+  addExercise(exercise: Exercise) {
+    return this.httpclient.post(`${this.PATH_OF_API}/`, exercise);
   }
 
   deleteExercise(id: string) {
     return this.httpclient.delete(`${this.PATH_OF_API}/${id}`);
+  }
+
+  updateExercise(exercise: Exercise, id: string) {
+    return this.httpclient.put(`${this.PATH_OF_API}/${id}`, exercise);
   }
 }
