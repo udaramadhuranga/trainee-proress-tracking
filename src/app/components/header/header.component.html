@@ -46,7 +46,7 @@
             aria-current="page"
             routerLink="/trainee-list"
             *ngIf="isMatched(['ROLE_ADMIN'])"
-            >Trainee List</a
+            >Trainees</a
           >
         </li>
 
@@ -56,7 +56,7 @@
             aria-current="page"
             routerLink="/trainer-list"
             *ngIf="isMatched(['ROLE_ADMIN'])"
-            >Trainer List</a
+            >Trainers</a
           >
         </li>
 
@@ -77,6 +77,26 @@
             routerLink="/trainee"
             *ngIf="isMatched(['ROLE_TRAINEE'])"
             >Trainee Dashoboard</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="/add-exercise"
+            *ngIf="isMatched(['ROLE_ADMIN'])"
+            >Add Exercise</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="/exercise-list"
+            *ngIf="isMatched(['ROLE_ADMIN'])"
+            >Exercises</a
           >
         </li>
       </ul>

@@ -1,0 +1,88 @@
+<div class="container mt-5">
+  <h1>Exercise Form</h1>
+
+  <form [formGroup]="exerciseForm">
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="exercise-name" class="form-label">Exercise Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="exercise-name"
+            name="exercise-name"
+            formControlName="title"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exercise-description" class="form-label"
+            >Exercise Description</label
+          >
+          <textarea
+            class="form-control"
+            id="exercise-description"
+            name="exercise-description"
+            formControlName="description"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="exercise-duration" class="form-label"
+            >Maximum time (in hours)</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="exercise-duration"
+            name="exercise-duration"
+            formControlName="maximum_time"
+          />
+        </div>
+      </div>
+      <div class="col" formArrayName="tasks">
+        <div
+          class="mb-3"
+          *ngFor="
+            let child of exerciseForm.get('tasks')['controls'];
+            let i = index
+          "
+          formGroupName="{{ i }}"
+        >
+          <label for="subtask-name" class="form-label">Subtask Name</label>
+          <div class="d-flex align-items-center">
+            <input
+              type="text"
+              class="form-control"
+              id="subtask-name"
+              name="subtask-name"
+              formControlName="task"
+            />
+
+            <button
+              type="button"
+              class="btn btn-danger btn-sm ms-2"
+              (click)="removeTask(i)"
+            >
+              -
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <button
+            type="submit"
+            class="btn btn-success btn-md"
+            (click)="addTask()"
+          >
+            + Add Subtask
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary" (click)="onclickSave()">
+      Save Exercise
+    </button>
+  </div>
+</div>
