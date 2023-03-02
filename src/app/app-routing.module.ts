@@ -1,3 +1,5 @@
+import { UpdateExerciseComponent } from './components/update-exercise/update-exercise.component';
+import { AddExerciseComponent } from './components/add-exercise/add-exercise.component';
 import { TraineeProgressDetailsComponent } from './components/trainee-progress-details/trainee-progress-details.component';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
@@ -12,6 +14,7 @@ import { TrainerListComponent } from './components/trainer-list/trainer-list.com
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { TraineeListComponent } from './components/trainee-list/trainee-list.component';
+import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -40,6 +43,9 @@ const routes: Routes = [
   { path: 'add-user', component: AddUserComponent },
   { path: 'update-user/:id', component: EditUserComponent },
   { path: 'trainee-progress', component: TraineeProgressDetailsComponent },
+  { path: 'add-exercise', component: AddExerciseComponent },
+  { path: 'update-exercise', component: UpdateExerciseComponent },
+  { path: 'exercise-list', component: ExerciseListComponent },
 ];
 
 @NgModule({
