@@ -2,6 +2,7 @@ import { User } from './../../models/user';
 import { UserService } from './../../_services/user.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AuthserviceService } from 'src/app/_services/authservice.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,14 +16,22 @@ export class EditUserComponent implements OnInit {
   role2: ['trainee'];
   showAlert = false;
   constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    public authService: AuthserviceService
   ) {}
   ngOnInit(): void {
     console.log(this.user1);
   }
 
   saveUser() {
+    if (this.authService.roleMatch(['ROLE_ADMIN'])) {
+      this.updateUsserByAdmin();
+    } else {
+      this.updateUserByTrainer();
+    }
+  }
+
+  updateUsserByAdmin() {
     const userObject = new User();
     (userObject.username = this.user1.username),
       (userObject.email = this.user1.email);
@@ -32,6 +41,22 @@ export class EditUserComponent implements OnInit {
       (userObject.roles = ['trainer']);
     this.userService
       .updateUser(userObject, this.user1.id)
+      .subscribe((response) => {
+        console.log(response);
+        this.showAlert = true;
+      });
+  }
+
+  updateUserByTrainer() {
+    const userObject = new User();
+    (userObject.username = this.user1.username),
+      (userObject.email = this.user1.email);
+    userObject.password = this.user1.password;
+    (userObject.phoneNo = this.user1.phoneNo),
+      (userObject.address = this.user1.address),
+      (userObject.roles = ['trainee']);
+    this.userService
+      .updateTraineeByTrainer(userObject, this.user1.id)
       .subscribe((response) => {
         console.log(response);
         this.showAlert = true;

@@ -18,18 +18,30 @@ export class TrainerListComponent implements OnInit {
     password: '',
     email: '',
   };
+  deletingUserid: any;
+  deleteModel = document.getElementById('deleteModal');
 
   constructor(private userService: UserService) {}
+
   ngOnInit(): void {
+    this.getTrainerList();
+  }
+
+  getTrainerList() {
     this.userService.getAllTrainers().subscribe((response: any) => {
       this.userList = response;
     });
   }
 
-  deleteStudent(id) {
-    this.userService.deleteUser(id).subscribe((response) => {
+  deleteStudent() {
+    this.userService.deleteUser(this.deletingUserid).subscribe((response) => {
       console.log(response);
     });
+
+    this.getTrainerList();
+  }
+  onclickDelete(id: string) {
+    this.deletingUserid = id;
   }
 
   onclickEdit(user: User) {

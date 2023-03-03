@@ -19,6 +19,8 @@ export class TraineeListComponent {
     password: '',
     email: '',
   };
+  deletingUserid: any;
+
   constructor(private userService: UserService, private router: Router) {}
   ngOnInit(): void {
     this.getStudentList();
@@ -30,20 +32,18 @@ export class TraineeListComponent {
     });
   }
 
-  deleteStudent(id) {
-    this.userService.deleteUser(id).subscribe((response) => {
-      console.log(response);
-    });
+  deleteStudent() {
+    this.userService
+      .deleteTraineeByTrainer(this.deletingUserid)
+      .subscribe((response) => {
+        console.log(response);
+      });
+    this.getStudentList();
   }
-
+  onclickDelete(id: string) {
+    this.deletingUserid = id;
+  }
   onclickEdit(user: User) {
-    // (this.editingUser.username = user.username),
-    //   (this.editingUser.password = user.password),
-    //   (this.editingUser.email = user.email),
-    //   (this.editingUser.roles = user.roles),
-    //   (this.editingUser.address = user.address),
-    //   (this.editingUser.phoneNo = user.phoneNo),
-    //   (this.editingUser.id = user.id);
     this.editingUser = user;
   }
 
