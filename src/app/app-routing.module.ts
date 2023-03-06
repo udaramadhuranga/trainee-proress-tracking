@@ -17,6 +17,7 @@ import { TraineeListComponent } from './components/trainee-list/trainee-list.com
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   {
     path: 'admin',
@@ -38,7 +39,12 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'forbidden', component: ForbiddenComponent },
-  { path: 'trainer-list', component: TrainerListComponent },
+  {
+    path: 'trainer-list',
+    component: TrainerListComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_ADMIN'] },
+  },
   { path: 'trainee-list', component: TraineeListComponent },
   { path: 'add-user', component: AddUserComponent },
   { path: 'update-user/:id', component: EditUserComponent },

@@ -26,11 +26,11 @@ export class ExerciseListComponent implements OnInit {
     });
   }
 
-  onClickDelete(id) {
+  onClickDelete(id: string) {
     this.exerciseService.deleteExercise(id).subscribe((response) => {
       console.log(response);
-      this.getAllExercises();
     });
+    this.getAllExercises();
   }
 
   onclickUpdate(exercise) {
