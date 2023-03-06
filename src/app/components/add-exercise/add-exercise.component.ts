@@ -71,7 +71,6 @@ export class AddExerciseComponent implements OnInit {
     this.exerciser.tasks = subtasks;
     this.exerciser.description = this.exerciseForm.value.description;
     this.exerciser.maximum_time = this.exerciseForm.value.maximum_time;
-
     this.exerciseService
       .addExercise(this.exerciser)
       .subscribe((response1: any) => {
@@ -89,7 +88,6 @@ export class AddExerciseComponent implements OnInit {
 
           this.traineeList.forEach((trainee) => {
             userExercise.traineeId = trainee.id;
-
             this.userExerciseService
               .addUserExercise(userExercise)
               .subscribe((reponse3: any) => {

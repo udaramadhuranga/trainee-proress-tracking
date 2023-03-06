@@ -174,5 +174,6 @@ export class UserComponent {
         this.myChart.destroy();
         this.getAllExerciseOfTrainee();
       });
+    window.location.reload();
   }
 }

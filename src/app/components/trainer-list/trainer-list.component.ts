@@ -37,7 +37,7 @@ export class TrainerListComponent implements OnInit {
     this.userService.deleteUser(this.deletingUserid).subscribe((response) => {
       console.log(response);
     });
-
+    alert('deleted Successfully');
     this.getTrainerList();
   }
   onclickDelete(id: string) {

@@ -48,7 +48,10 @@
           [(ngModel)]="user1.phoneNo"
         />
       </div>
-      <div class="mb-2" *ngIf="authService.roleMatch(['ROLE_ADMIN'])">
+      <div
+        class="mb-2"
+        *ngIf="authService.roleMatch(['ROLE_ADMIN']) && user1.roles.length != 0"
+      >
         <label class="form-label mb-3">Role</label>
 
         <div class="form-check">
@@ -56,8 +59,9 @@
             class="form-check-input"
             type="radio"
             id="role2"
-            [(ngModel)]="user1.roles"
-            value="[role1]"
+            [checked]="user1.roles[0].name == 'ROLE_TRAINER'"
+            (change)="user1.roles[0].name = $event.target.value"
+            [value]="role1"
           />
           <label class="form-check-label" for="role2"> Trainer </label>
         </div>
@@ -66,6 +70,8 @@
             class="form-check-input"
             type="radio"
             id="role1"
+            [checked]="user1.roles[0].name == 'ROLE_TRAINEE'"
+            (change)="user1.roles[0].name = $event.target.value"
             [value]="role2"
           />
           <label class="form-check-label" for="role1"> Trainee </label>
