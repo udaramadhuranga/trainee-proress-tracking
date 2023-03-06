@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthserviceService {
-  PATH_OF_API = 'http://localhost:3005/api';
+  PATH_OF_API = environment.apiBaseUrl + 'auth';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -20,7 +21,7 @@ export class AuthserviceService {
 
   login(loginData): Observable<any> {
     return this.httpclient.post(
-      this.PATH_OF_API + '/auth/signin',
+      this.PATH_OF_API + '/signin',
       loginData,
       this.httpOptions
     );

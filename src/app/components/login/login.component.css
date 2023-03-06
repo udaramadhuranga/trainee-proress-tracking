@@ -1,0 +1,17 @@
+.loginContaine {
+  background: url("../../../assets/ctheme1.png") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+}
+
+div.card {
+  position: absolute;
+  left: 820px;
+  top: 250px;
+  border: 3px solid #73ad21;
+}
+
+.log {
+  position: absolute;
+  margin-left: 100px;
+}
