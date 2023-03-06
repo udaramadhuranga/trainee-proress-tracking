@@ -38,6 +38,7 @@ export class TraineeListComponent {
       .subscribe((response) => {
         console.log(response);
       });
+    alert('deleted Successfully');
     this.getStudentList();
   }
   onclickDelete(id: string) {

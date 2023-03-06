@@ -1,4 +1,4 @@
-<div class="container background-color: oldlace">
+<div class="container" style="background-color: aliceblue">
   <div class="row">
     <h1>Progress</h1>
     <div class="col-md-6">
@@ -79,7 +79,13 @@
                   </div>
                 </div>
 
-                <div class="col-md-6" *ngIf="exercise.status != 'Completed'">
+                <div
+                  class="col-md-6"
+                  *ngIf="
+                    exercise.status != 'Completed' &&
+                    exercise.status != 'Not Started'
+                  "
+                >
                   <div class="btn btn-info" (click)="onClickComplete(exercise)">
                     Complete
                   </div>

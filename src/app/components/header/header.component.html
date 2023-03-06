@@ -111,10 +111,50 @@
         *ngIf="isLoogedIn()"
         type="button"
         class="btn btn-danger"
-        (click)="logout()"
+        data-bs-toggle="modal"
+        data-bs-target="#logoutModal"
       >
         Logout
       </button>
     </div>
   </div>
 </nav>
+
+<div
+  class="modal fade"
+  id="logoutModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="justify-content: center">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Log out</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="justify-content: center">
+        Do you want To Log out?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          #closebutton
+          class="btn btn-danger"
+          (click)="logout()"
+          data-bs-dismiss="modal"
+        >
+          Yes
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
