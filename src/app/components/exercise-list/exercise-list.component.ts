@@ -23,7 +23,6 @@ export class ExerciseListComponent implements OnInit {
 
   getAllExercises() {
     this.exerciseService.getAllExercises().subscribe((response: any) => {
-      console.log(response);
       this.ExerciseList = response;
     });
   }

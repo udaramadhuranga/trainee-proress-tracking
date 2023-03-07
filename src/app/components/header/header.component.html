@@ -107,6 +107,19 @@
       >
         Login
       </button>
+      <div
+        class="d-flex d-inline p-3 mt-3"
+        *ngIf="isLoogedIn() && storageService.getUserName() != null"
+      >
+        <i
+          class="fa fa-user-circle fa-2x me-1"
+          style="color: aliceblue"
+          aria-hidden="true"
+        ></i>
+        <h4 style="color: aliceblue">
+          {{ storageService.getUserName() }}
+        </h4>
+      </div>
       <button
         *ngIf="isLoogedIn()"
         type="button"

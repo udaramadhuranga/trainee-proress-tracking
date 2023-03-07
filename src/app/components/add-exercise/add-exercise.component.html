@@ -17,6 +17,12 @@
             name="exercise-name"
             formControlName="title"
           />
+          <span
+            class="mb-1"
+            style="color: red"
+            *ngIf="customeValidationService.isFieldValid(exerciseForm, 'title')"
+            >This is Required</span
+          >
         </div>
         <div class="mb-3">
           <label for="exercise-description" class="form-label labels"
@@ -28,6 +34,14 @@
             name="exercise-description"
             formControlName="description"
           ></textarea>
+          <span
+            class="mb-1"
+            style="color: red"
+            *ngIf="
+              customeValidationService.isFieldValid(exerciseForm, 'description')
+            "
+            >This is Required</span
+          >
         </div>
         <div class="mb-3">
           <label for="exercise-duration" class="form-label labels"
@@ -41,6 +55,17 @@
             min="0"
             formControlName="maximum_time"
           />
+          <span
+            class="mb-1"
+            style="color: red"
+            *ngIf="
+              customeValidationService.isFieldValid(
+                exerciseForm,
+                'maximum_time'
+              )
+            "
+            >This is Required</span
+          >
         </div>
       </div>
       <div class="col" formArrayName="tasks">

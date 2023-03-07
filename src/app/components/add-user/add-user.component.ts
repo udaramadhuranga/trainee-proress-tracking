@@ -68,7 +68,6 @@ export class AddUserComponent implements OnInit {
 
   addUserByAdmin() {
     if (this.user.valid) {
-      console.log(this.user.value);
       const userObject = new User();
       (userObject.username = this.user.value.username),
         (userObject.email = this.user.value.email);
@@ -77,15 +76,12 @@ export class AddUserComponent implements OnInit {
         (userObject.address = this.user.value.address),
         (userObject.roles = [this.user.value.role]);
       this.userService.createUser(userObject).subscribe((response: any) => {
-        console.log(response);
         this.showAlert = true;
         const createdUser = response;
         if (this.user.value.role === 'trainee') {
           this.exerciseService.getAllExercises().subscribe((response2: any) => {
             this.exerciseList = response2;
-
             let userExercise = new UserExerciserReq();
-
             userExercise.Assined_Date = null;
             userExercise.Completed_Date = null;
             userExercise.comment = '';
@@ -96,8 +92,6 @@ export class AddUserComponent implements OnInit {
               this.userExerciseService
                 .addUserExercise(userExercise)
                 .subscribe((reponse3: any) => {
-                  console.log(reponse3);
-
                   this.router.navigate(['/trainee-list']);
                 });
             });
@@ -113,7 +107,6 @@ export class AddUserComponent implements OnInit {
 
   addUserByTrainer() {
     if (this.user.valid) {
-      console.log(this.user.value);
       const userObject = new User();
       (userObject.username = this.user.value.username),
         (userObject.email = this.user.value.email);
@@ -124,7 +117,6 @@ export class AddUserComponent implements OnInit {
       this.userService
         .createUserByTrainer(userObject)
         .subscribe((response: any) => {
-          console.log(response);
           this.showAlert = true;
           const createdUser = response;
           this.exerciseService.getAllExercises().subscribe((response2: any) => {
@@ -140,7 +132,6 @@ export class AddUserComponent implements OnInit {
               this.userExerciseService
                 .addUserExercise(userExercise)
                 .subscribe((reponse3: any) => {
-                  console.log(reponse3);
                   this.router.navigate(['/trainee-list']);
                 });
             });

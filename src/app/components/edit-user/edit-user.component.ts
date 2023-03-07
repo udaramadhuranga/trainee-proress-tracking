@@ -7,7 +7,6 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AuthserviceService } from 'src/app/_services/authservice.service';
 
 @Component({
@@ -17,13 +16,11 @@ import { AuthserviceService } from 'src/app/_services/authservice.service';
 })
 export class EditUserComponent implements OnInit, OnChanges {
   @Input() user1: User;
-
   user: any;
-
   role1: any = ['ROLE_TRAINER'];
   role2: any = ['ROLE_TRAINEE'];
-
   showAlert = false;
+
   constructor(
     private userService: UserService,
     public authService: AuthserviceService
@@ -31,7 +28,6 @@ export class EditUserComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     this.user = this.user1;
   }
 
@@ -59,7 +55,6 @@ export class EditUserComponent implements OnInit, OnChanges {
       this.userService
         .updateUser(userObject, this.user1.id)
         .subscribe((response) => {
-          console.log(response);
           this.showAlert = true;
         });
   }
@@ -75,7 +70,6 @@ export class EditUserComponent implements OnInit, OnChanges {
     this.userService
       .updateTraineeByTrainer(userObject, this.user1.id)
       .subscribe((response) => {
-        console.log(response);
         this.showAlert = true;
       });
   }
