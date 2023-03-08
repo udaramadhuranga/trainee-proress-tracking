@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthserviceService } from 'src/app/_services/authservice.service';
 
 @Component({
   selector: 'app-trainer',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trainer.component.css'],
 })
 export class TrainerComponent implements OnInit {
-  constructor() {}
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  constructor(private authService: AuthserviceService) {}
+  ngOnInit(): void {}
+
+  public isMatched(allowedRoles): boolean {
+    return this.authService.roleMatch(allowedRoles);
   }
 }

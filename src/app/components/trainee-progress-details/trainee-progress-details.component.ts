@@ -31,7 +31,6 @@ export class TraineeProgressDetailsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.router.queryParams.subscribe((params: any) => {
-      console.log(params.data);
       this.userid = params.data;
     });
 
@@ -40,17 +39,13 @@ export class TraineeProgressDetailsComponent implements OnInit {
 
   getAllExercises() {
     this.userExercise.getAllTrainers(this.userid).subscribe((response: any) => {
-      console.log(response);
       this.ExerciseList = response;
     });
   }
 
   getAllExerciseOfTrainee() {
     this.userExercise.getAllTrainers(this.userid).subscribe((response: any) => {
-      console.log(response);
       this.ExerciseList = response;
-
-      console.log(this.ExerciseList);
       if (this.ExerciseList != null) {
         let completedCount = 0;
         let inProgressCount = 0;
@@ -121,14 +116,12 @@ export class TraineeProgressDetailsComponent implements OnInit {
 
   onClickSave(exercise: UserExercise) {
     const userExerciseReq = new UserExerciserReq();
-
     userExerciseReq.Assined_Date = exercise.Assined_Date;
     userExerciseReq.Completed_Date = exercise.Completed_Date;
     userExerciseReq.comment = exercise.comment;
     userExerciseReq.exercise = exercise.exercise.id;
     userExerciseReq.status = exercise.status;
     userExerciseReq.traineeId = exercise.traineeId.id;
-
     this.userExercise
       .updatTraineeExerciseByAdmin(userExerciseReq, exercise.id)
       .subscribe((response) => {
@@ -140,7 +133,6 @@ export class TraineeProgressDetailsComponent implements OnInit {
 
   onClickChangeState(exercise: UserExercise) {
     const userExerciseReq = new UserExerciserReq();
-
     userExerciseReq.Assined_Date = exercise.Assined_Date;
     userExerciseReq.Completed_Date = null;
     userExerciseReq.comment = exercise.comment;
@@ -152,7 +144,6 @@ export class TraineeProgressDetailsComponent implements OnInit {
       .updatTraineeExerciseByAdmin(userExerciseReq, exercise.id)
       .subscribe((response) => {
         alert('success');
-        console.log(response);
         this.myChart.destroy();
         this.getAllExerciseOfTrainee();
       });

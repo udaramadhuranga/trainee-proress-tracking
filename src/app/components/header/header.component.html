@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Progress Tracker</a>
     <button
@@ -34,8 +34,27 @@
           <a
             class="nav-link active"
             aria-current="page"
+            routerLink="/trainee"
+            *ngIf="isMatched(['ROLE_TRAINEE'])"
+            >Trainee Dashoboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="/trainer"
+            *ngIf="isMatched(['ROLE_TRAINER'])"
+            >Trainer Dashoboard</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
             routerLink="/add-user"
-            *ngIf="isMatched(['ROLE_ADMIN'])"
+            *ngIf="isMatched(['ROLE_ADMIN']) || isMatched(['ROLE_TRAINER'])"
             >Add Users</a
           >
         </li>
@@ -45,7 +64,7 @@
             class="nav-link active"
             aria-current="page"
             routerLink="/trainee-list"
-            *ngIf="isMatched(['ROLE_ADMIN'])"
+            *ngIf="isMatched(['ROLE_ADMIN']) || isMatched(['ROLE_TRAINER'])"
             >Trainees</a
           >
         </li>
@@ -64,28 +83,8 @@
           <a
             class="nav-link active"
             aria-current="page"
-            routerLink="/trainer"
-            *ngIf="isMatched(['ROLE_TRAINER'])"
-            >Trainer Dashoboard</a
-          >
-        </li>
-
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            routerLink="/trainee"
-            *ngIf="isMatched(['ROLE_TRAINEE'])"
-            >Trainee Dashoboard</a
-          >
-        </li>
-
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
             routerLink="/add-exercise"
-            *ngIf="isMatched(['ROLE_ADMIN'])"
+            *ngIf="isMatched(['ROLE_ADMIN']) || isMatched(['ROLE_TRAINER'])"
             >Add Exercise</a
           >
         </li>
@@ -95,7 +94,7 @@
             class="nav-link active"
             aria-current="page"
             routerLink="/exercise-list"
-            *ngIf="isMatched(['ROLE_ADMIN'])"
+            *ngIf="isMatched(['ROLE_ADMIN']) || isMatched(['ROLE_TRAINER'])"
             >Exercises</a
           >
         </li>
@@ -108,14 +107,67 @@
       >
         Login
       </button>
+      <div
+        class="d-flex d-inline p-3 mt-3"
+        *ngIf="isLoogedIn() && storageService.getUserName() != null"
+      >
+        <i
+          class="fa fa-user-circle fa-2x me-1"
+          style="color: aliceblue"
+          aria-hidden="true"
+        ></i>
+        <h4 style="color: aliceblue">
+          {{ storageService.getUserName() }}
+        </h4>
+      </div>
       <button
         *ngIf="isLoogedIn()"
         type="button"
         class="btn btn-danger"
-        (click)="logout()"
+        data-bs-toggle="modal"
+        data-bs-target="#logoutModal"
       >
         Logout
       </button>
     </div>
   </div>
 </nav>
+
+<div
+  class="modal fade"
+  id="logoutModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="justify-content: center">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Log out</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" style="justify-content: center">
+        Do you want To Log out?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          #closebutton
+          class="btn btn-danger"
+          (click)="logout()"
+          data-bs-dismiss="modal"
+        >
+          Yes
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

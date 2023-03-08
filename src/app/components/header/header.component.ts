@@ -10,7 +10,7 @@ import { StorageService } from 'src/app/_services/storage.service';
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    private storageService: StorageService,
+    public storageService: StorageService,
     private router: Router,
     private authService: AuthserviceService
   ) {}

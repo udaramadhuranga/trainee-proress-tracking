@@ -1,6 +1,6 @@
 import { Exercise } from './../../models/exercise';
 import { ExerciceService } from './../../_services/exercice-service.';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ExerciseListComponent implements OnInit {
   ExerciseList!: Exercise[];
+  deletingExerciseId: string;
+  @ViewChild('closebutton') closebutton;
   constructor(
     private exerciseService: ExerciceService,
     private router: Router
@@ -21,16 +23,20 @@ export class ExerciseListComponent implements OnInit {
 
   getAllExercises() {
     this.exerciseService.getAllExercises().subscribe((response: any) => {
-      console.log(response);
       this.ExerciseList = response;
     });
   }
 
-  onClickDelete(id) {
-    this.exerciseService.deleteExercise(id).subscribe((response) => {
-      console.log(response);
-      this.getAllExercises();
-    });
+  onClickDelete(id: string) {
+    this.deletingExerciseId = id;
+  }
+
+  deleteExercise() {
+    this.exerciseService
+      .deleteExercise(this.deletingExerciseId)
+      .subscribe((response) => {});
+    alert('deleted Successfully');
+    window.location.reload();
   }
 
   onclickUpdate(exercise) {

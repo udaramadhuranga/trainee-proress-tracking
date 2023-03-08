@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddExerciseComponent } from './components/add-exercise/add-exercise.component';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { UpdateExerciseComponent } from './components/update-exercise/update-exercise.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { UpdateExerciseComponent } from './components/update-exercise/update-exe
     AddExerciseComponent,
     ExerciseListComponent,
     UpdateExerciseComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

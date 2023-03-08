@@ -18,18 +18,30 @@ export class TrainerListComponent implements OnInit {
     password: '',
     email: '',
   };
+  deletingUserid: any;
+  deleteModel = document.getElementById('deleteModal');
 
   constructor(private userService: UserService) {}
+
   ngOnInit(): void {
+    this.getTrainerList();
+  }
+
+  getTrainerList() {
     this.userService.getAllTrainers().subscribe((response: any) => {
       this.userList = response;
     });
   }
 
-  deleteStudent(id) {
-    this.userService.deleteUser(id).subscribe((response) => {
+  deleteStudent() {
+    this.userService.deleteUser(this.deletingUserid).subscribe((response) => {
       console.log(response);
     });
+    alert('deleted Successfully');
+    this.getTrainerList();
+  }
+  onclickDelete(id: string) {
+    this.deletingUserid = id;
   }
 
   onclickEdit(user: User) {
@@ -40,6 +52,5 @@ export class TrainerListComponent implements OnInit {
       (this.editingUser.address = user.address),
       (this.editingUser.phoneNo = user.phoneNo),
       (this.editingUser.id = user.id);
-    // this.editingUser = user;
   }
 }

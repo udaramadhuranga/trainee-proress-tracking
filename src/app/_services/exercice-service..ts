@@ -1,12 +1,13 @@
 import { Exercise } from './../models/exercise';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExerciceService {
-  PATH_OF_API = 'http://localhost:3005/api/tasks';
+  PATH_OF_API = environment.apiBaseUrl + 'tasks';
 
   constructor(private httpclient: HttpClient) {}
 

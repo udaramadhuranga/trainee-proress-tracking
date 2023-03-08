@@ -1,6 +1,47 @@
-<div class="container mt-5">
-  <div class="card" style="padding: 20px">
-    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+<div class="container mt-5 loginContaine w-100 h-75">
+  <div
+    class=""
+    style="
+      text-align: end;
+      position: absolute;
+      margin-top: 20px;
+      margin-left: 1000px;
+      float: left;
+    "
+  >
+    <label
+      class="mt-5"
+      style="
+        font-size: 50px;
+        color: lawngreen;
+        font-weight: lighter;
+        font-style: normal;
+      "
+      >h</label
+    >
+    <label
+      class="mt-5"
+      style="
+        font-size: 50px;
+        color: darkgreen;
+        font-weight: bold;
+        font-style: normal;
+      "
+      >Senid</label
+    >
+    <label
+      class="mt-5"
+      style="
+        font-size: 50px;
+        color: black;
+        font-weight: lighter;
+        font-style: normal;
+      "
+      >Lanka</label
+    >
+  </div>
+  <div class="card" style="padding: 40px; width: 35%; height: 50%">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="mt-4">
       <input
         type="text"
         ngModel
@@ -25,5 +66,12 @@
         class="btn btn-outline-primary form-control rounded-0"
       />
     </form>
+  </div>
+  <div class="log mt-5" style="width: fit-content; height: fit-content">
+    <img
+      src="../../../assets/log.png"
+      alt="image not support"
+      style="height: 460px; width: 500px"
+    />
   </div>
 </div>
