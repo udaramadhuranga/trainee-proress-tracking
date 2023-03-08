@@ -2,12 +2,13 @@ import { UserExercise } from './../models/user-exercise';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserExerciserReq } from '../models/user-exerciser-req';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserExerciseService {
-  PATH_OF_API = 'http://localhost:3005/api/user-exercise';
+  PATH_OF_API = environment.apiBaseUrl + 'user-exercise';
 
   constructor(private httpclient: HttpClient) {}
 

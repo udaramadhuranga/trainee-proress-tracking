@@ -52,6 +52,5 @@ export class TrainerListComponent implements OnInit {
       (this.editingUser.address = user.address),
       (this.editingUser.phoneNo = user.phoneNo),
       (this.editingUser.id = user.id);
-    // this.editingUser = user;
   }
 }

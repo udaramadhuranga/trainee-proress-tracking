@@ -38,14 +38,12 @@ export class UserComponent {
 
   getAllExercises() {
     this.userExercise.getAllTrainers(this.userid).subscribe((response: any) => {
-      console.log(response);
       this.ExerciseList = response;
     });
   }
 
   getAllExerciseOfTrainee() {
     this.userExercise.getAllTrainers(this.userid).subscribe((response: any) => {
-      console.log(response);
       this.ExerciseList = response;
 
       console.log(this.ExerciseList);
@@ -119,23 +117,20 @@ export class UserComponent {
 
   onClickStart(exercise: UserExercise) {
     const userExerciseReq = new UserExerciserReq();
-
     userExerciseReq.Assined_Date = null;
     userExerciseReq.Completed_Date = null;
-
     userExerciseReq.exercise = exercise.exercise.id;
     userExerciseReq.status = 'Not Started';
     userExerciseReq.traineeId = exercise.traineeId.id;
-
     this.userExercise
       .updatTraineeExerciseByTrainee(userExerciseReq, exercise.id)
       .subscribe((response) => {
         alert('success');
-        console.log(response);
         this.myChart.destroy();
         this.getAllExerciseOfTrainee();
       });
   }
+
   onClickInprogress(exercise: UserExercise) {
     const userExerciseReq = new UserExerciserReq();
 
@@ -150,7 +145,6 @@ export class UserComponent {
       .updatTraineeExerciseByTrainee(userExerciseReq, exercise.id)
       .subscribe((response) => {
         alert('success');
-        console.log(response);
         this.myChart.destroy();
         this.getAllExerciseOfTrainee();
       });
@@ -170,7 +164,6 @@ export class UserComponent {
       .updatTraineeExerciseByTrainee(userExerciseReq, exercise.id)
       .subscribe((response) => {
         alert('success');
-        console.log(response);
         this.myChart.destroy();
         this.getAllExerciseOfTrainee();
       });

@@ -30,6 +30,14 @@ export class StorageService {
     return localStorage.getItem('id');
   }
 
+  public setUserName(userName: string) {
+    localStorage.setItem('userName', userName);
+  }
+
+  public getUserName(): string {
+    return localStorage.getItem('userName');
+  }
+
   public isLoggedIn() {
     return this.getRoles() && this.getToken();
   }
