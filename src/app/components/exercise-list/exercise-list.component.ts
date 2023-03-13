@@ -32,10 +32,15 @@ export class ExerciseListComponent implements OnInit {
   }
 
   deleteExercise() {
-    this.exerciseService
-      .deleteExercise(this.deletingExerciseId)
-      .subscribe((response) => {});
-    alert('deleted Successfully');
+    this.exerciseService.deleteExercise(this.deletingExerciseId).subscribe(
+      (response) => {
+        alert('deleted Successfully');
+      },
+      (error) => {
+        alert('Delete faield');
+      }
+    );
+
     window.location.reload();
   }
 

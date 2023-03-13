@@ -90,9 +90,14 @@ export class UpdateExerciseComponent implements OnInit {
 
     this.exerciseService
       .updateExercise(this.exerciser, this.exerciser.id)
-      .subscribe((response: any) => {
-        console.log(response);
-        this.router.navigate(['/exercise-list']);
-      });
+      .subscribe(
+        (response: any) => {
+          console.log(response);
+          this.router.navigate(['/exercise-list']);
+        },
+        (error) => {
+          alert('Exercise updating faield');
+        }
+      );
   }
 }

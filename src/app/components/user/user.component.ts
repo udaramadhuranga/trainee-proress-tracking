@@ -129,6 +129,7 @@ export class UserComponent {
         this.myChart.destroy();
         this.getAllExerciseOfTrainee();
       });
+    window.location.reload();
   }
 
   onClickInprogress(exercise: UserExercise) {
@@ -148,6 +149,7 @@ export class UserComponent {
         this.myChart.destroy();
         this.getAllExerciseOfTrainee();
       });
+    window.location.reload();
   }
 
   onClickComplete(exercise: UserExercise) {

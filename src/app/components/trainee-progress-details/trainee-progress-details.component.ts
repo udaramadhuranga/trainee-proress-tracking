@@ -147,5 +147,6 @@ export class TraineeProgressDetailsComponent implements OnInit {
         this.myChart.destroy();
         this.getAllExerciseOfTrainee();
       });
+    window.location.reload();
   }
 }

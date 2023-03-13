@@ -75,31 +75,38 @@ export class AddUserComponent implements OnInit {
       (userObject.phoneNo = this.user.value.phoneNo),
         (userObject.address = this.user.value.address),
         (userObject.roles = [this.user.value.role]);
-      this.userService.createUser(userObject).subscribe((response: any) => {
-        this.showAlert = true;
-        const createdUser = response;
-        if (this.user.value.role === 'trainee') {
-          this.exerciseService.getAllExercises().subscribe((response2: any) => {
-            this.exerciseList = response2;
-            let userExercise = new UserExerciserReq();
-            userExercise.Assined_Date = null;
-            userExercise.Completed_Date = null;
-            userExercise.comment = '';
-            userExercise.status = 'Not Started';
-            userExercise.traineeId = createdUser.id;
-            this.exerciseList.forEach((exercise) => {
-              userExercise.exercise = exercise.id;
-              this.userExerciseService
-                .addUserExercise(userExercise)
-                .subscribe((reponse3: any) => {
-                  this.router.navigate(['/trainee-list']);
+      this.userService.createUser(userObject).subscribe(
+        (response: any) => {
+          this.showAlert = true;
+          const createdUser = response;
+          if (this.user.value.role === 'trainee') {
+            this.exerciseService
+              .getAllExercises()
+              .subscribe((response2: any) => {
+                this.exerciseList = response2;
+                let userExercise = new UserExerciserReq();
+                userExercise.Assined_Date = null;
+                userExercise.Completed_Date = null;
+                userExercise.comment = '';
+                userExercise.status = 'Not Started';
+                userExercise.traineeId = createdUser.id;
+                this.exerciseList.forEach((exercise) => {
+                  userExercise.exercise = exercise.id;
+                  this.userExerciseService
+                    .addUserExercise(userExercise)
+                    .subscribe((reponse3: any) => {
+                      this.router.navigate(['/trainee-list']);
+                    });
                 });
-            });
-          });
-        } else {
-          this.router.navigate(['/trainer-list']);
+              });
+          } else {
+            this.router.navigate(['/trainer-list']);
+          }
+        },
+        (error) => {
+          alert('User Adding failed');
         }
-      });
+      );
     } else {
       this.customeValidationService.validateAllFormFields(this.user);
     }
@@ -114,9 +121,8 @@ export class AddUserComponent implements OnInit {
       (userObject.phoneNo = this.user.value.phoneNo),
         (userObject.address = this.user.value.address),
         (userObject.roles = ['trainee']);
-      this.userService
-        .createUserByTrainer(userObject)
-        .subscribe((response: any) => {
+      this.userService.createUserByTrainer(userObject).subscribe(
+        (response: any) => {
           this.showAlert = true;
           const createdUser = response;
           this.exerciseService.getAllExercises().subscribe((response2: any) => {
@@ -136,7 +142,11 @@ export class AddUserComponent implements OnInit {
                 });
             });
           });
-        });
+        },
+        (error) => {
+          alert('User Adding failed');
+        }
+      );
     } else {
       this.customeValidationService.validateAllFormFields(this.user);
     }

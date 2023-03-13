@@ -33,11 +33,17 @@ export class TrainerListComponent implements OnInit {
     });
   }
 
-  deleteStudent() {
-    this.userService.deleteUser(this.deletingUserid).subscribe((response) => {
-      console.log(response);
-    });
-    alert('deleted Successfully');
+  deleteUser() {
+    this.userService.deleteUser(this.deletingUserid).subscribe(
+      (response) => {
+        console.log(response);
+        alert('deleted Successfully');
+        this.getTrainerList();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.getTrainerList();
   }
   onclickDelete(id: string) {
