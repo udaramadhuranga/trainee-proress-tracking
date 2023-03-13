@@ -33,17 +33,24 @@ export class TraineeListComponent {
   }
 
   deleteStudent() {
-    this.userService
-      .deleteTraineeByTrainer(this.deletingUserid)
-      .subscribe((response) => {
+    this.userService.deleteTraineeByTrainer(this.deletingUserid).subscribe(
+      (response) => {
         console.log(response);
-      });
-    alert('deleted Successfully');
+        alert('deleted Successfully');
+        this.getStudentList();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
     this.getStudentList();
   }
+
   onclickDelete(id: string) {
     this.deletingUserid = id;
   }
+
   onclickEdit(user: User) {
     this.editingUser = user;
   }

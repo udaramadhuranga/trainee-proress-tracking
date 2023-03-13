@@ -52,11 +52,14 @@ export class EditUserComponent implements OnInit, OnChanges {
     userObject.password = this.user1.password;
     (userObject.phoneNo = this.user1.phoneNo),
       (userObject.address = this.user1.address),
-      this.userService
-        .updateUser(userObject, this.user1.id)
-        .subscribe((response) => {
+      this.userService.updateUser(userObject, this.user1.id).subscribe(
+        (response) => {
           this.showAlert = true;
-        });
+        },
+        (error) => {
+          alert('User updating faield');
+        }
+      );
   }
 
   updateUserByTrainer() {
@@ -69,8 +72,13 @@ export class EditUserComponent implements OnInit, OnChanges {
       (userObject.roles = ['trainee']);
     this.userService
       .updateTraineeByTrainer(userObject, this.user1.id)
-      .subscribe((response) => {
-        this.showAlert = true;
-      });
+      .subscribe(
+        (response) => {
+          this.showAlert = true;
+        },
+        (error) => {
+          alert('User updating faield');
+        }
+      );
   }
 }

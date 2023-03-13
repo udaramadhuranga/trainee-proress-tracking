@@ -69,9 +69,8 @@ export class AddExerciseComponent implements OnInit {
       this.exerciser.tasks = subtasks;
       this.exerciser.description = this.exerciseForm.value.description;
       this.exerciser.maximum_time = this.exerciseForm.value.maximum_time;
-      this.exerciseService
-        .addExercise(this.exerciser)
-        .subscribe((response1: any) => {
+      this.exerciseService.addExercise(this.exerciser).subscribe(
+        (response1: any) => {
           const createdExercise = response1;
           this.userService.getAllTrainees().subscribe((response2: any) => {
             this.traineeList = response2;
@@ -90,7 +89,11 @@ export class AddExerciseComponent implements OnInit {
                 });
             });
           });
-        });
+        },
+        (error) => {
+          alert('Exercise Adding faield');
+        }
+      );
     } else {
       this.customeValidationService.validateAllFormFields(this.exerciseForm);
     }
